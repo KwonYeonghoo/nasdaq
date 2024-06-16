@@ -62,6 +62,7 @@
     - 기존 순차적으로 실행하던 때와 비교해 약 30분 절약
   - AWS EC2에 Airflow 환경을 구축하여 매일 아침 6시에 태스크 수행
     - Graph를 통해 직관적인 실행 흐름 확인 가능
+    - <img width="1491" alt="스크린샷 2024-06-17 오전 12 16 45" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/39157ece-7de1-4638-b051-4691bd68d3ab">
 
 ### 비용 효율적인 LLM 모델 선정
 - 토큰 단위가 아닌 글자 단위의 가격 정책을 적용하는 Gemini Pro 모델 사용
@@ -82,6 +83,7 @@
 ### 서로다른 에러를 각각 다르게 처리
 - 400, 404, 500에러 등등
 - ExceptionHandler를 통해 각각의 에러에 대해 서로 다른 로직을 작성
+- <img width="905" alt="스크린샷 2024-06-17 오전 12 18 57" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/524fb0bc-46d3-428e-ae56-67adbd792934">
 
 ### SpringBoot JPA 복합키 구현 문제 해결
 - 단순히 @Id 어노테이션을 여러 개 사용하는 것으로는 부족하여 @EmbeddedId 어노테이션
@@ -92,11 +94,13 @@
 ### 협업을 위한 공용 DB
 - 협업자 모두가 사용할 수 있는 DB를 AWS RDS를 통해 생성
   - EC2에서 MySQL을 호스팅하는 것도 고려했으나, RDS의 1년 무료 이용 혜택을 활용
+  - ![스크린샷 2024-06-17 오전 12 22 07](https://github.com/KwonYeonghoo/nasdaq/assets/100892536/b29326d2-549f-4692-b390-9980b5e9f342)
 
 ### RDS와 함께 S3 활용
 - 뉴스 원문이나 공시 리포트를 DB에 적재하기에는 텍스트가 너무 길다는 판단
     - S3에 데이터를 저장하고, S3 객체 키를 DB에 저장하여 데이터에 접근하는 방식으로 변경 (비용 문제🙅‍♂️)
- 
+    - <img width="1154" alt="스크린샷 2024-06-17 오전 12 20 04" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/3f4ade83-65b2-47b8-a997-94af94fc7739">
+
 ### CI/CD 자동화를 위한 AWS CodePipeline
 - AWS CodePipeline을 활용하여 6월 안으로 CI/CD 파이프라인 구축 예정!
 
