@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.nasdaq.exception.CustomException;
 import com.example.nasdaq.model.DAO.UserDao;
 import com.example.nasdaq.model.Entity.UserEntity;
 import com.example.nasdaq.model.Repository.UserRepository;
@@ -36,7 +37,7 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void insertUser(UserEntity entity)throws Exception {
+    public void insertUser(UserEntity entity) throws CustomException {
         // TODO Auto-generated method stub
         userRepository.save(entity);
     }

@@ -46,6 +46,8 @@ public class DailyUpdateServiceImpl implements DailyUpdateService{
             dto.setPsr(entity.getPsr());
             dto.setPbr(entity.getPbr());
             dto.setEv_ebitda(entity.getEv_ebitda());
+            dto.setFluc(entity.getFluc());
+            dto.setClose_price(entity.getClose_price());
 
             dtos.add(dto);
         }
@@ -124,6 +126,7 @@ public class DailyUpdateServiceImpl implements DailyUpdateService{
             dto.setPbr(entity.getPbr());
             dto.setPer(entity.getPer());
             dto.setFluc(entity.getFluc());
+            dto.setClose_price(entity.getClose_price());
 
             dtos.add(dto);
         }

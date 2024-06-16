@@ -19,7 +19,7 @@ public class stockDataController {
     private StockDataService stockDataService;
 
     @GetMapping("/bollinger")
-    public List<StockDataDto> getBollinger(@RequestParam String ticker) {
+    public List<StockDataDto> getBollinger(@RequestParam String ticker) throws Exception{
         return stockDataService.getOneStockData(ticker);
     }
 }

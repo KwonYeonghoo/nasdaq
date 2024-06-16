@@ -39,4 +39,6 @@ public class DailyUpdateDto {
     private double ev_ebitda;
 
     private double fluc;
+
+    private double close_price;
 }

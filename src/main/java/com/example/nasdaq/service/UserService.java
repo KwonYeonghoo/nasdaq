@@ -3,6 +3,7 @@ package com.example.nasdaq.service;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.nasdaq.exception.CustomException;
 import com.example.nasdaq.model.DTO.UserDto;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ public interface UserService {
     public List<UserDto> getAllUser();
 
     // insert
-    public void insertUser(UserDto dto)throws Exception;
+    public void insertUser(UserDto dto)throws CustomException;
 
     // update
     public void updateUser(UserDto dto);

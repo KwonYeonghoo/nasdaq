@@ -27,9 +27,16 @@ public class authController {
     private UserService userService;
 
     @GetMapping("/loginPage")
-    public String getLoginPage(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model) {
+    public String getLoginPage(@RequestParam(value = "errorMessage", required = false) String errorMessage, Model model,HttpServletResponse response) throws Exception {
         model.addAttribute("errorMessage", errorMessage);
-        return "/login";
+        if(model.getAttribute("errorMessage")!=null){
+            ScriptUtils.alertAndBackPage(response,errorMessage);
+            return "login";
+
+        }
+       
+        
+        return "login";
     }
 
     @GetMapping("/registerPage")

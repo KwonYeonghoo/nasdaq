@@ -77,13 +77,6 @@
           </form>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-settings d-none d-lg-flex">
-            <a class="nav-link" href="#">
-              <i class="icon-ellipsis"></i>
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item" style="margin: 0.5em;">
               <a class="nav-link" href="#">
               {{userName}}님 환영합니다!
@@ -183,51 +176,45 @@
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
-                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-                <script>
-                  function addToWatchlist(userId, ticker, name) {
-                    const encodedUserId = encodeURIComponent(userId);
-                    const encodedTicker = encodeURIComponent(ticker);
-                    // const encodedName = encodeURIComponent(name);
+                <div class="col-8 col-xl-6 mb-4 mb-xl-0">
+                  <h2 id="name_fluc" class="font-weight-bold">{{name}}  <span id="fluctuation">{{Fluc}}</span><span id="percentage">%</span></h2>
+                  <h3 class="font-weight-bold">전 날 종가: ${{ClosePrice}}</h3>
+                  <script>
+                    let FlucElement = document.getElementById('fluctuation');
+                    let Fluc = FlucElement.textContent;
+                    let PerElement = document.getElementById('percentage');
+                    
 
-                    axios.post(`/api/v1/nasdaq/addWatchlist`, null, {
-                      params: {
-                          userId: encodedUserId,
-                          ticker: encodedTicker,
-                          name: name
-                      }
-                    })
-                    .then(response => {
-                      const watchlistButton = document.getElementById('watchlistButton');
-                      if (response.data === 1) {
-                        console.log(response.data)
-                          watchlistButton.innerText = '관심종목 삭제';
-                          watchlistButton.classList.remove('btn-primary')
-                          watchlistButton.classList.add('btn-delete')
-                          alert("관심종목에 추가되었습니다.")
-                      } else if (response.data === 0) {
-                        console.log(response.data)
-                          watchlistButton.innerText = '관심종목 추가';
-                          watchlistButton.classList.remove('btn-delete')
-                          watchlistButton.classList.add('btn-primary')
-                          alert("관심종목에서 삭제되었습니다.")
-                      }
-                  })
-                    .catch(error => {
-                      alert('관심종목에 추가할 때 오류가 발생했습니다!')
-                    });
-                  }
-                </script>
-                <div class="col-12 col-xl-6 mb-4 mb-xl-0">
-                  <h2 class="font-weight-bold">{{name}}<span><button id="watchlistButton" class="btn btn-primary font-weight-bold d-flex align-items-center" onclick="addToWatchlist('{{userName}}', '{{ticker}}', '{{name}}')">관심종목 추가</button></span></h2>
-                  <h5 class="font-weight-normal mb-0" id="ticker"><span class="text-primary">{{ticker}}</span></h5>
-                  <h5 class="font-weight-normal mb-0" id="industry"><span class="text-primary">{{Industry}}</span></h5>
-                  <h6 class="font-weight-normal mb-0"><span class="text-primary" id="today-date">{{dailydate}}</span></h6>
+                    if (Fluc >= 0) {
+                      FlucElement.textContent = `+${Fluc}`;
+                      FlucElement.style.color = 'red';
+                      PerElement.style.color = 'red';
+                    } else {
+                      FlucElement.textContent = `${Fluc}`;
+                      FlucElement.style.color = 'green';
+                      PerElement.style.color = 'green';
+                    }
+
+                  </script>
+                  <div class='row'>
+                    <div class="col-5 mb-xl-6 mb-xl-3" >
+                      <h5 class="font-weight-normal mb-0" id="ticker"><span class="text-primary">{{ticker}}</span></h5>
+                      <h5 class="font-weight-normal mb-0" id="industry"><span class="text-primary">{{Industry}}</span></h5>
+                      <h6 class="font-weight-normal mb-0"><span class="text-primary" id="today-date">{{dailydate}}</span></h6>
+                    </div>
+                    <div class="col-3 col-xl-6 mb-0  mb-xl-3">
+                      <script>
+                        const watchlist_userId = '{{userName}}';
+                        const watchlist_ticker = '{{ticker}}';
+                        let isinWatchlist = false;
+                      </script>
+                      <script src="/js/watchlist.js"></script>
+                      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                      <button id="watchlistButton" class="btn btn-primary font-weight-bold d-flex align-items-center" onclick="toggleWatchlist('{{userName}}', '{{ticker}}', '{{name}}')">관심종목 추가</button>
+                    </div>
+                  </div>
                 </div>
-                <!-- <div class="col-12 col-xl-3 mb-4 mb-xl-0">
-                  <button class="btn btn-primary font-weight-bold d-flex align-items-center">관심종목 추가</button>
-                </div> -->
-                <div class="col-12 col-xl-6">
+                <div class="col-3 col-xl-6">
                  <div class="justify-content-end d-flex">
                   <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
                     <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -255,17 +242,17 @@
           </div>
           <div class="row align-items-center">
             <div class="col-md-3 grid-margin stretch-card">
-              <div class="card tale-bg">
+              <div class="card royal">
                 <div class="card-body">
                   <p class="font-weight-large" id="today-date">{{ticker}} 기업정보</p>
                   <div class="card">
                     {{#nasdaq100}}
                     <div class="card-body">
-                      <p class="font-weight-medium">{{established}}</p>
-                      <p class="font-weight-medium">{{CEO}}</p>
-                      <p class="font-weight-medium">{{products}}</p>
-                      <p class="font-weight-medium">{{milestones}}</p>
-                      <p class="font-weight-medium">{{industry}}</p>
+                      <p class="font-weight-medium" style="color: black">{{established}}</p>
+                      <p class="font-weight-medium" style="color: black">{{CEO}}</p>
+                      <p class="font-weight-medium" style="color: black">{{products}}</p>
+                      <p class="font-weight-medium" style="color: black">{{milestones}}</p>
+                      <p class="font-weight-medium" style="color: black">{{industry}}</p>
                     </div>
                     {{/nasdaq100}}
                   </div>
@@ -283,7 +270,7 @@
                           <p class="font-weight-large">오늘의 {{ticker}} 뉴스요약</p>
                           <div class="card">
                             <div class="card-body">
-                              <p class="font-weight-medium">{{.}}</p>
+                              <p class="font-weight-medium" style="color: black">{{.}}</p>
                             </div>
                           </div>
                         </div>
@@ -296,7 +283,7 @@
                 <button class="next-btn">&#10095;</button>
               </div>
             </div>
-            <div class="col-md-4 grid-margin transparent">
+            <!-- <div class="col-md-4 grid-margin transparent">
               <div class="row">
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-light-danger">
@@ -333,6 +320,14 @@
                   </div>
                 </div>
               </div>
+            </div> -->
+            <div class="col-lg-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">5일 예측 그래프</h4>
+                  <canvas id="lineChart"></canvas>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -346,7 +341,7 @@
                         <p class="font-weight-large">{{ticker}} 연간 리포트(10-K) 요약</p>
                         <div class="card">
                           <div class="card-body">
-                        <p class="font-weight-medium">{{summary_10k}}</p>
+                        <p class="font-weight-medium" style="color: black">{{summary_10k}}</p>
                           </div>
                         </div>
                       </div>
@@ -358,7 +353,7 @@
                         <p class="font-weight-large">{{ticker}} 분기별 리포트(10-Q) 요약</p>
                         <div class="card">
                           <div class="card-body">
-                        <p class="font-weight-medium">{{summary_10q}}</p>
+                        <p class="font-weight-medium" style="color: black">{{summary_10q}}</p>
                           </div>
                         </div>
                       </div> 
@@ -376,23 +371,23 @@
               </div>
             </div>
             {{/edgar}}
-            <div class="col-md-4 grid-margin stretch-card">
+            <div class="col-md-6 grid-margin stretch-card">
               <script src="https://code.highcharts.com/stock/highstock.js"></script>
               <script src="https://code.highcharts.com/stock/modules/data.js"></script>
               <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
               <script src="https://code.highcharts.com/stock/modules/heikinashi.js"></script>
               <script src="https://code.highcharts.com/stock/indicators/indicators-all.js"></script>
-              <div id="container"></div>
-              <script src="/js/industry.js"></script>
+              <div id="industry2"></div>
+              <script src="/js/industry2.js"></script>
             </div>
-            <div class="col-lg-4 grid-margin stretch-card">
+            <!-- <div class="col-lg-4 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">5일 예측 그래프</h4>
                   <canvas id="lineChart"></canvas>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           
             <!-- <button class="btn btn-primary" id="openModalBtn">볼린저밴드 해석하는 법</button>
@@ -424,26 +419,26 @@
             <script src="/js/bollinger.js"></script>
             </div>
             <div class="col-md-4 grid-margin stretch-card">
-              <div class="card card-grey">
+              <div class="card royal">
                 <div class="card-body">
                   <p class="font-weight-large">볼린저밴드 해석</p>
                   <div class="card">
                     <div class="card-body">
-                      <p class="font-size-24">- 현재 주가 위치 분석</p>
-                      <p class="font-weight-medium">현재 주가가 이동평균선 근처에 위치해 있다면, 이는 시장이 비교적 안정적인 상태임을 의미합니다.
+                      <p class="font-size-24" style="color: black">- 현재 주가 위치 분석</p>
+                      <p class="font-weight-medium" style="color: black">현재 주가가 이동평균선 근처에 위치해 있다면, 이는 시장이 비교적 안정적인 상태임을 의미합니다.
                         주가가 상단 밴드에 가까워질 경우, 이는 시장이 과매수 상태에 접근하고 있음을 나타낼 수 있으며, 주가가 하락할 가능성이 높아질 수 있습니다.
                         주가가 하단 밴드에 가까워질 경우, 이는 시장이 과매도 상태에 접근하고 있음을 나타낼 수 있으며, 주가가 상승할 가능성이 높아질 수 있습니다.
                       </p>
                     </div>
                     <div class="card-body">
-                      <p class="font-size-24">- 밴드 수축 및 확장</p>
-                      <p class="font-weight-medium">밴드가 수축하면 시장의 변동성이 낮아졌음을 나타내며, 이는 곧 큰 변동이 발생할 가능성을 시사합니다.
+                      <p class="font-size-24" style="color: black">- 밴드 수축 및 확장</p>
+                      <p class="font-weight-medium" style="color: black">밴드가 수축하면 시장의 변동성이 낮아졌음을 나타내며, 이는 곧 큰 변동이 발생할 가능성을 시사합니다.
                         밴드가 확장하면 시장의 변동성이 높아졌음을 나타내며, 이는 현재 트렌드가 지속될 가능성을 시사합니다.
                       </p>
                     </div>
                     <div class="card-body">
-                      <p class="font-size-24">- 트레이딩 전략</p>
-                      <p class="font-weight-medium">
+                      <p class="font-size-24" style="color: black">- 트레이딩 전략</p>
+                      <p class="font-weight-medium" style="color: black">
                         밴드 터치 전략: 주가가 상단 밴드를 터치하면 매도, 하단 밴드를 터치하면 매수하는 전략을 고려할 수 있습니다.
                         밴드 수축 후 돌파 전략: 밴드가 수축된 후 주가가 상단 밴드를 돌파하면 매수, 하단 밴드를 돌파하면 매도하는 전략을 사용할 수 있습니다.
                       </p>

@@ -11044,6 +11044,7 @@ textarea.is-invalid.tt-hint {
   line-height: 1;
   /* border-radius: 0.1875rem; */
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  z-index: 1000;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -14971,6 +14972,7 @@ a.close.disabled {
   height: 100%;
   overflow: hidden;
   outline: 0;
+  z-index: 2000;
 }
 
 .modal-dialog {
@@ -15050,12 +15052,14 @@ a.close.disabled {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 80%;
   pointer-events: auto;
   background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid #CED4DA;
   border-radius: 0.3rem;
   outline: 0;
+  z-index: 2001;
 }
 
 .modal-backdrop {
@@ -22041,8 +22045,27 @@ code {
   border: none;
 }
 
+.card.porcelain {
+  background: #EDF1F6;
+}
+
 .card.tale-bg {
   background: #DAE7FF;
+}
+
+.card.royal {
+  background: #334EAC;
+  color: #FFFFFF
+}
+
+.card.china {
+  background: #7096D1;
+  color: #FFFFFF;
+}
+
+.card.asian-pear {
+  background: #F2F0DE;
+  color:  #000000
 }
 
 .card.transparent {
@@ -22158,13 +22181,13 @@ code {
 }
 
 .card.card-news {
-  background: #E0F2F1;
-  color: #000000;
+  background: #334EAC;
+  color: #FFFFFF;
 }
 
 .card.card-report {
-  background: #E0F2F1;
-  color: #000000;
+  background: #334EAC;
+  color: #FFFFFF;
 }
 
 .card-news .card-body {
@@ -22710,6 +22733,7 @@ code {
   color: #c9c8c8;
   width: auto;
   border: none;
+  z-index:1000;
 }
 
 .input-group-append .input-group-text,
@@ -28516,7 +28540,9 @@ div.tagsinput span.tag a {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: calc(100% - 235px);
+  height: 100%;
+  width: 100%;
+  /* width: calc(100% - 235px); */
   min-height: calc(100vh - 60px);
   display: -webkit-flex;
   display: flex;
@@ -28532,7 +28558,7 @@ div.tagsinput span.tag a {
 }
 
 .content-wrapper {
-  background: #F5F7FF;
+  background: #F7F2EB;
   padding: 2.375rem 2.375rem;
   width: 100%;
   -webkit-flex-grow: 1;
@@ -30686,6 +30712,7 @@ div.tagsinput span.tag a {
 }
 
 #search-results {
+  display: none;
   border: 1px solid #ccc;
   max-height: 200px;
   overflow-y: auto;

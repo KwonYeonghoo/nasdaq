@@ -33,7 +33,7 @@ public class mainController {
     private IndustryService industryService;
 
     @GetMapping("/main")
-    public String mainPage(Model model) {
+    public String mainPage(Model model) throws Exception{
 
     String recentDate = dailyUpdateService.getMostRecentDate();
     List<IndustryDto> dtos = industryService.getAllIndustry();
@@ -73,5 +73,5 @@ public class mainController {
     }
     return "main";
 }
-    
+
 }

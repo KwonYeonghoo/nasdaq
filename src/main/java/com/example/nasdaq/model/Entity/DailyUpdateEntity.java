@@ -50,4 +50,6 @@ public class DailyUpdateEntity {
     private double ev_ebitda;
 
     private double fluc;
+
+    private double close_price;
 }

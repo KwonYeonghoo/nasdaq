@@ -23,10 +23,12 @@ import com.example.nasdaq.service.DailyUpdateService;
 import com.example.nasdaq.service.EdgarReportsService;
 import com.example.nasdaq.service.IndustryService;
 import com.example.nasdaq.service.Nasdaq100Service;
+import com.example.nasdaq.service.NetworkService;
 import com.example.nasdaq.service.S3Service;
 import com.example.nasdaq.service.WatchlistService;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
 @RequestMapping("/user/v1/nasdaq")
@@ -51,12 +53,15 @@ public class userController {
     @Autowired
     private WatchlistService watchlistService;
 
+    @Autowired
+    private NetworkService networkService;
+
 
     private static final String BUCKET_NAME = "playdata-team1-bucket";
 
 
     @GetMapping("/main")
-    public String mainPage(@AuthenticationPrincipal AuthUserDto user, Model model) {
+    public String mainPage(@AuthenticationPrincipal AuthUserDto user, Model model) throws Exception{
 
     String recentDate = dailyUpdateService.getMostRecentDate();
     List<IndustryDto> dtos = industryService.getAllIndustry();
@@ -103,7 +108,7 @@ public class userController {
 
 
     @GetMapping("/details")
-    public String detailsPage(@AuthenticationPrincipal AuthUserDto user, Model model, @RequestParam String ticker){
+    public String detailsPage(@AuthenticationPrincipal AuthUserDto user, Model model, @RequestParam String ticker) throws Exception{
         String recentDate = dailyUpdateService.getMostRecentDate();
         List<DailyUpdateDto> dtos = dailyUpdateService.getOneDailyInfo(ticker, recentDate);
         DailyUpdateDto firstDto = dtos.get(0);
@@ -136,6 +141,8 @@ public class userController {
         model.addAttribute("company", firstDto);
         // 숫자를 포맷팅하여 세 자리마다 쉼표 추가
         model.addAttribute("MarketCap", formatNumber(firstDto.getMarket_cap()));
+        model.addAttribute("Fluc", firstDto.getFluc());
+        model.addAttribute("ClosePrice", firstDto.getClose_price());
         model.addAttribute("edgar", edgarReportsService.getOneEdgarInfo(ticker));
 
         model.addAttribute("userName", user.getUsername());
@@ -145,11 +152,15 @@ public class userController {
     }
 
     @GetMapping("/search")
-    public String searchTicker(@RequestParam String ticker){
+    public String searchTicker(@RequestParam String ticker) throws Exception{
         String recent_date = dailyUpdateService.getMostRecentDate();
         String url = String.format("/user/v1/nasdaq/details?ticker=%s&dailydate=%s", ticker, recent_date);
         return "redirect:" + url;
     }
+
+
+    
+
 
     public static double roundToTwoDecimalPlaces(double num) {
         // 소수 둘째 자리까지 확장하여 반올림

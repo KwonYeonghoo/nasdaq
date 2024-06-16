@@ -39,7 +39,7 @@ public class LoginAuthFailureHandler extends SimpleUrlAuthenticationFailureHandl
           log.error("message: "+errorMessage+" / code: "+code);
 
           errorMessage = URLEncoder.encode(errorMessage, "UTF-8"); /* 한글 인코딩 깨진 문제 방지 */
-          setDefaultFailureUrl("/loginPage?errorMessage="+errorMessage);
+          setDefaultFailureUrl("/v1/nasdaq/loginPage?errorMessage="+errorMessage);
 
       }
   

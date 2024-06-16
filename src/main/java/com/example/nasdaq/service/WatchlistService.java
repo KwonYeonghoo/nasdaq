@@ -7,6 +7,7 @@ import com.example.nasdaq.model.DTO.WatchlistDto;
 public interface WatchlistService {
     public List<WatchlistDto> getWatchlist(String userId);
 
-    public Integer toggleWatchlist(String userId, String ticker, String name);
+    public WatchlistDto getOneWatchlist(String userId, String ticker);
 
+    public Integer toggleWatchlist(String userId, String ticker, String name);
 }

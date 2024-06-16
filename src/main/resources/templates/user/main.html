@@ -120,7 +120,7 @@
               <div class="card transparent">
                 <p class="font-weight-large">오늘의 관심 종목 검색</p>
                 <div class="search-body transparent stretch-card">
-                  <div class="mt-3 inputs-main input-group">
+                  <div class="inputs-main input-group">
                     <input type="text" name="ticker" class="form-control" id="ticker-search" placeholder="MSFT, AAPL, NVDA 등 관심 종목의 코드를 입력하세요!">
                     <div class="input-group-append">
                       <button class="btn" type="button" id="search-btn">검색</button>
@@ -128,11 +128,11 @@
                     <script>
                       document.getElementById('ticker-search').addEventListener('input', function() {
                           const query = this.value;
+                          const resultsContainer = document.getElementById('search-results');
                           if (query.length > 0) { // 최소 1글자 이상 입력 시 요청
                               fetch(`/api/v1/nasdaq/search?ticker=${query}`)
                                   .then(response => response.json())
                                   .then(data => {
-                                      const resultsContainer = document.getElementById('search-results');
                                       resultsContainer.innerHTML = '';
                                       data.tickers.forEach(ticker => {
                                           const div = document.createElement('div');
@@ -143,10 +143,12 @@
                                           });
                                           resultsContainer.appendChild(div);
                                       });
+                                      resultsContainer.style.display = 'block';
                                   })
                                   .catch(error => console.error('Error fetching tickers:', error));
                           } else {
                               document.getElementById('search-results').innerHTML = '';
+                              resultsContainer.style.display = 'none';
                           }
                       });
                   </script>
@@ -162,12 +164,13 @@
                     });
                   </script>
                   </div>
+                  <div id="search-results"></div>
                 </div>
-                <div id="search-results"></div>
+                
               </div>
             </div>
             <div class="col-md-4 grid-margin stretch-card">
-              <div class="card card-light-blue">
+              <div class="card china">
                 <div class="card-body">
                   <p class="font-weight-large">관심 종목</p>
                   <div class="card">
@@ -187,17 +190,25 @@
             <script src="https://code.highcharts.com/modules/exporting.js"></script>
             <script src="https://code.highcharts.com/modules/export-data.js"></script>
             <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+            <script src="https://code.highcharts.com/modules/networkgraph.js"></script>
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card transparent">
                 <p class="font-weight-large">오늘의 나스닥 산업군 추천</p>
                 <div id="compareIndustry" style="width: 100%; height: 400px;"></div>
-                <script src="/js/compareIndustry.js"></script>
               </div>
             </div>
+            <div id="networkModal" class="modal">
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                  <div id="Network" style="width: 100%; height: 100%; display: none;"></div>
+              </div>
+            </div>
+            <script src="/js/compareIndustry.js"></script>
+            <script src="/js/modal.js"></script>
 
             <div class="col-md-6 grid-margin stretch-card">
               <div class="col-md-6 grid-margin stretch-card">
-                <div class="card tale-bg">
+                <div class="card china">
                   <div class="card-body">
                     <p class="font-weight-large mb-2">산업군별 Best 종목</p>
                     <p class="font-weight-medium">클릭 시 종목 상세로 넘어갑니다</p>
@@ -225,7 +236,7 @@
                 </div>
               </div>
               <div class="col-md-6 grid-margin stretch-card">
-                <div class="card tale-bg">
+                <div class="card china">
                   <div class="card-body">
                     <p class="font-weight-large mb-2">Hottest🔥</p>
                     <p class="font-weight-medium">클릭 시 종목 상세로 넘어갑니다</p>
@@ -261,6 +272,9 @@
     <!-- page-body-wrapper ends -->
   <!-- container-scroller -->
   <!-- plugins:js -->
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
   <script src="../../vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
