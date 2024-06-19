@@ -42,12 +42,14 @@ public class WatchlistServiceImpl implements WatchlistService{
         // TODO Auto-generated method stub
         WatchlistEntity entity = watchlistDao.getOneWatchlist(userId, ticker);
         WatchlistDto dto = new WatchlistDto();
+        if (entity != null){
+            dto.setUserId(entity.getUserId());
+            dto.setTicker(entity.getTicker());
+            dto.setName(entity.getName());
 
-        dto.setUserId(entity.getUserId());
-        dto.setTicker(entity.getTicker());
-        dto.setName(entity.getName());
-
-        return dto;
+            return dto;
+        }
+        return null;
     }
 
 

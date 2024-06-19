@@ -14,10 +14,12 @@ function checkIsInWatchlist(userId, ticker) {
       })
       .then(response => {
         if (response.data) {
+          console.log(response.data);
             isinWatchlist = true;
         } else {
             isinWatchlist = false;
         }
+        console.log(isinWatchlist);
         updateWatchlistButton();
       })
       .catch(error => {
