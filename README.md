@@ -44,7 +44,7 @@
 
 ---
 
-### 웹 아키텍쳐
+### 데이터 플로우
 ![웹 아키텍쳐](https://github.com/KwonYeonghoo/nasdaq/assets/100892536/785beb55-0cd2-4895-8155-c2983872f1d6)
 
 ---
