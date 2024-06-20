@@ -44,8 +44,9 @@
 
 ---
 
-### 데이터 플로우
-![웹 아키텍쳐](https://github.com/KwonYeonghoo/nasdaq/assets/100892536/785beb55-0cd2-4895-8155-c2983872f1d6)
+### 프로젝트 아키텍처
+![나스닥나랑해_아키텍처 (1)](https://github.com/KwonYeonghoo/nasdaq/assets/100892536/1ad40c1c-0f08-4257-89a1-c79bf32a5b44)
+
 
 ---
 
