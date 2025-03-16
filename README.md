@@ -108,9 +108,5 @@
 
 ### CI/CD 자동화를 위한 AWS CodePipeline
 - AWS CodePipeline을 활용하여 6월 안으로 CI/CD 파이프라인 구축 예정!
----
-
-## 깃허브 링크 🔗
-[나스닥 나랑해❤️ GitHub](https://github.com/KwonYeonghoo/nasdaq/tree/main)
 
 ---
