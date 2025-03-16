@@ -108,23 +108,6 @@
 
 ### CI/CD 자동화를 위한 AWS CodePipeline
 - AWS CodePipeline을 활용하여 6월 안으로 CI/CD 파이프라인 구축 예정!
-
----
-## 서비스 화면
-- 메인화면: 검색창, 핫한 산업군 top3와 각 산업군별 best 종목, 등락률 top3 종목
-<img width="1496" alt="스크린샷 2024-06-16 오후 11 25 57" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/99588891-4656-4a63-b106-05d3bea845af">
-
-- 산업군 클러스터링: 상관관계 분석을 통해 연관성이 가장 높은 산업군 5개 표출
-<img width="1496" alt="스크린샷 2024-06-16 오후 11 28 40" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/5dcf73e5-d8b9-4e15-800b-35773311e2f9">
-
-- 종목상세 페이지: 간단한 기업정보, 전 날 뉴스요약, 5일치 주가예측, 공시자료 요약, 산업군 재무지표 평균vs종목 재무지표, 볼린저밴드와 주가 차트 & 해석법
-<img width="1501" alt="스크린샷 2024-06-16 오후 11 27 05" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/eb1d81e6-c53c-41c2-a8c8-2e511a4d02f2">
-<img width="1498" alt="스크린샷 2024-06-16 오후 11 28 13" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/5703c2d7-75c7-4672-b96f-8ab06a1cca78">
-<img width="1500" alt="스크린샷 2024-06-16 오후 11 27 28" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/aeac97f8-929c-4200-a892-f3d3370f591c">
-
-- 주요 경제이벤트 캘린더
-<img width="1498" alt="스크린샷 2024-06-16 오후 11 29 17" src="https://github.com/KwonYeonghoo/nasdaq/assets/100892536/8f6a55e3-7827-4c0a-9a3f-307600fe7a3c">
-
 ---
 
 ## 깃허브 링크 🔗
